@@ -1,0 +1,99 @@
+
+export type BloodType = 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
+export type UserRole = 'Donor' | 'BloodBank' | 'Hospital';
+
+export interface Location {
+  lat: number;
+  lng: number;
+  address: string;
+}
+
+export interface Donor {
+  id: string;
+  name: string;
+  age: number;
+  bloodType: BloodType;
+  lastDonation: string;
+  distance?: number;
+  lat?: number;
+  lng?: number;
+  phone: string;
+  isAvailable: boolean;
+  medicalHistory?: string;
+  lastHealthCheck?: string;
+  idNumber?: string;
+  idVerified?: boolean;
+  profilePicture?: string;
+  unitsDonatedYear?: number;
+  donationCount?: number;
+  permanentAddress?: string;
+  email?: string;
+  password?: string;
+  createdAt?: string;
+  lastBagId?: string;
+  lastBagExpiry?: string;
+}
+
+export interface AuthenticatedUser {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  avatar?: string;
+}
+
+export interface BloodBank {
+  id: string;
+  name: string;
+  inventory: Record<BloodType, number>;
+  plateletsCount: number;
+  location: Location;
+  source: 'e-Raktkosh' | 'WellSky' | 'UBLOOD' | 'Local';
+  lastSync: string;
+  phone: string;
+}
+
+export interface BloodBag {
+  id: string;
+  type: BloodType | 'Platelets';
+  expiryDate: string;
+  collectionDate: string;
+  source: string;
+  volume: number; // in ml
+  bankId?: string;
+  status: 'Available' | 'Allocated' | 'Dispatched';
+}
+
+export interface BloodDrive {
+  id: string;
+  title: string;
+  organizer: string;
+  date: string;
+  location: string;
+  description: string;
+  coordinates: { lat: number; lng: number };
+}
+
+export interface EmergencyRequest {
+  id: string;
+  patientName: string;
+  admissionNumber?: string;
+  dob?: string;
+  bloodType: BloodType;
+  unitsNeeded: number;
+  location: string;
+  hospital: string;
+  urgency: 'Critical' | 'High' | 'Normal';
+  isPlateletRequest: boolean;
+  contact: string;
+  timestamp: string;
+  coordinates?: { lat: number; lng: number };
+  status?: 'Pending' | 'Allocated' | 'Dispatched' | 'Fulfilled' | 'Received';
+  allocatedBagIds?: string[];
+}
+
+export interface AIRecommendation {
+  donorId: string;
+  reason: string;
+  priorityScore: number;
+}

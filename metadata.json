@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Red Command Pro",
+  "description": "Professional multi-node emergency blood coordination platform with e-RaktKosh integration and Gemini-powered Command Center.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}
